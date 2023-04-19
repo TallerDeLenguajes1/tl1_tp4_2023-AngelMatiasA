@@ -13,7 +13,7 @@ struct Tarea
 
 // void Cargar
 
-
+void cargarTareas( Tarea ** tareas, int can);
 int main()
 {
 
@@ -38,38 +38,17 @@ int main()
     //reserva del puntero doble
     //reserva de la estructura
     //reserva de la descripcion
-    srand(time(NULL));
-    char aux[500];
-    for (int i = 0; i < can; i++)
 
-    {
-        tareas[i] =malloc(sizeof(Tarea));
-        tareas[i]->TareaID=i+1;
-        
-        
-        tareas[i]->Duracion = 10+ rand()% (100-10);  
+    cargarTareas(tareas, can);
 
-        printf("ingrese una descripcion de la tarea \n"); 
-        gets(aux); 
-        fflush(stdin); 
-        tareas[i]->Descripcion = malloc(sizeof(char) * strlen(aux));
-        strcpy( tareas[i]->Descripcion, aux);
-        
-
-
-        
-    }
 
 //tareas realizadas y pendientes
     Tarea **tareasR = (struct Tarea **)malloc(sizeof(struct Tarea *) * can); // reserva de memoeria a un puntero que va a apuntar a una estrcutura
       for (int i = 0; i < can; i++)
 
     {
-
         tareasR[i] = NULL;
-        
-   
-        
+  
     }
     char respuesta[10];
     int j = 0;
@@ -138,4 +117,29 @@ printf("************* \n");
 
     // tareas[i].Duracion = 3;
     return 0;
+}
+
+void cargarTareas( Tarea ** tareas, int can){
+     srand(time(NULL));
+    char aux[500];
+    for (int i = 0; i < can; i++)
+
+    {
+        tareas[i] =malloc(sizeof(Tarea));
+        tareas[i]->TareaID=i+1;
+        
+        
+        tareas[i]->Duracion = 10+ rand()% (100-10);  
+
+        printf("ingrese una descripcion de la tarea \n"); 
+        gets(aux); 
+        fflush(stdin); 
+        tareas[i]->Descripcion = malloc(sizeof(char) * strlen(aux));
+        strcpy( tareas[i]->Descripcion, aux);
+        
+
+
+        
+    }
+
 }
