@@ -16,6 +16,8 @@ struct Tarea
 void cargarTareas( Tarea ** tareas, int can);
 void moverRealizadas(Tarea ** tareas, int can, Tarea ** tareasR);
 void ListarTareas(Tarea ** tareas, int can, Tarea ** tareasR);
+void BuscarTareas(Tarea ** tareas, int can, Tarea ** tareasR);
+
 int main()
 {
 
@@ -59,6 +61,7 @@ int main()
     /*5. Mostrar por pantalla todas las tareas realizadas y luego listar las tareas
 pendientes.*/
 ListarTareas(tareas, can, tareasR);
+BuscarTareas(tareas, can, tareasR);
 
 
 for (int i = 0; i < can; i++)
@@ -168,5 +171,32 @@ printf("************* \n");
         }
         
     }
+
+}
+
+/* Cree un nuevo branch llamado busca-tarea e implemente una función de
+búsqueda de tarea por nro. de id de nombre BuscarTarea. La misma devuelve
+la tarea solicitada.*/
+void BuscarTareas(Tarea ** tareas, int can, Tarea ** tareasR){
+    int id ;
+    printf("ingrese el id de la tarea a buscar \n"); 
+    scanf("%d", &id);
+    fflush(stdin);
+    for (int i = 0; i < can; i++)
+    {
+        if (tareas[i] != NULL && tareas[i]->TareaID == id )
+        {
+            printf("La tarea con el id nro %d es: \n", id);
+            puts(tareas[i]->Descripcion);
+        }
+        if (tareasR[i] != NULL && tareasR[i]->TareaID == id)
+        {
+            printf("La tarea con el id nro %d es: \n", id);
+            puts(tareasR[i]->Descripcion);
+        }
+        
+        
+    }
+    
 
 }
