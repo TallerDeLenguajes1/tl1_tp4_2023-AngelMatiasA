@@ -15,6 +15,7 @@ struct Tarea
 
 void cargarTareas( Tarea ** tareas, int can);
 void moverRealizadas(Tarea ** tareas, int can, Tarea ** tareasR);
+void ListarTareas(Tarea ** tareas, int can, Tarea ** tareasR);
 int main()
 {
 
@@ -57,42 +58,21 @@ int main()
 
     /*5. Mostrar por pantalla todas las tareas realizadas y luego listar las tareas
 pendientes.*/
+ListarTareas(tareas, can, tareasR);
 
-printf("********************* \n");
-printf("tareas pendiente \n");
-      for (int i = 0; i < can; i++)
 
-    {
-        if (tareas[i] != NULL)
-        {   
-            
-             printf(" la tarea numero %d \n",  tareas[i]->TareaID);
-        printf(" duracion de la tarea %d\n",  tareas[i]->Duracion);
-             printf("Cuya descripcion es: \n");  
-        puts(tareas[i]->Descripcion);
-        }
-        
-      
- 
-    }
+for (int i = 0; i < can; i++)
+{
+    free(tareas[i]->Descripcion);
+    free(tareas[i]->Duracion);
+    free(tareas[i]->TareaID);
+    free(tareasR[i]->Descripcion);    
+    free(tareasR[i]->Duracion);   
+    free(tareasR[i]->TareaID);
 
-printf("************* \n");
-      printf("tareas realizadas \n");
-    for (int i = 0; i < can; i++)
-    {
-
-       
-       
-        if (tareasR[i] != NULL)
-        {   
-           
-             printf(" la tarea numero %d \n",  tareasR[i]->TareaID);
-        printf(" duracion de la tarea %d\n",  tareasR[i]->Duracion);
-             printf("Cuya descripcion es: \n");  
-        puts(tareasR[i]->Descripcion);
-        }
-        
-    }
+}
+free(tareas); 
+free(tareasR);
     
 
 
@@ -146,6 +126,45 @@ void moverRealizadas(Tarea ** tareas, int can, Tarea ** tareasR){
          
             tareas[i] = NULL; 
             j++;
+        }
+        
+    }
+
+}
+
+void ListarTareas(Tarea ** tareas, int can, Tarea ** tareasR){
+    printf("********************* \n");
+printf("tareas pendiente \n");
+      for (int i = 0; i < can; i++)
+
+    {
+        if (tareas[i] != NULL)
+        {   
+            
+             printf(" la tarea numero %d \n",  tareas[i]->TareaID);
+        printf(" duracion de la tarea %d\n",  tareas[i]->Duracion);
+             printf("Cuya descripcion es: \n");  
+        puts(tareas[i]->Descripcion);
+        }
+        
+      
+ 
+    }
+
+printf("************* \n");
+      printf("tareas realizadas \n");
+    for (int i = 0; i < can; i++)
+    {
+
+       
+       
+        if (tareasR[i] != NULL)
+        {   
+           
+             printf(" la tarea numero %d \n",  tareasR[i]->TareaID);
+        printf(" duracion de la tarea %d\n",  tareasR[i]->Duracion);
+             printf("Cuya descripcion es: \n");  
+        puts(tareasR[i]->Descripcion);
         }
         
     }
