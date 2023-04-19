@@ -14,6 +14,7 @@ struct Tarea
 // void Cargar
 
 void cargarTareas( Tarea ** tareas, int can);
+void moverRealizadas(Tarea ** tareas, int can, Tarea ** tareasR);
 int main()
 {
 
@@ -50,28 +51,8 @@ int main()
         tareasR[i] = NULL;
   
     }
-    char respuesta[10];
-    int j = 0;
-     for (int i = 0; i < can; i++)
-
-    {
-        printf(" Realizo la tarea numero %d ?\n",  tareas[i]->TareaID);
-        // printf(" duracion de la tarea %d\n",  tareas[i]->Duracion);
-        printf("Cuya descripcion es: \n");  
-        puts(tareas[i]->Descripcion);
-
-        printf("ingrese si para confirmar, no para denegar \n"); 
-        gets(respuesta); 
-        fflush(stdin); 
-        if (strcmp(respuesta, "si") == 0)
-        {   
-            tareasR[j] = tareas[i];
-         
-            tareas[i] = NULL; 
-            j++;
-        }
-        
-    }
+    moverRealizadas(tareas, can, tareasR);
+ 
 
 
     /*5. Mostrar por pantalla todas las tareas realizadas y luego listar las tareas
@@ -119,7 +100,8 @@ printf("************* \n");
     return 0;
 }
 
-void cargarTareas( Tarea ** tareas, int can){
+void cargarTareas( Tarea ** tareas, int can){ 
+
      srand(time(NULL));
     char aux[500];
     for (int i = 0; i < can; i++)
@@ -139,6 +121,32 @@ void cargarTareas( Tarea ** tareas, int can){
         
 
 
+        
+    }
+
+}
+
+void moverRealizadas(Tarea ** tareas, int can, Tarea ** tareasR){
+     char respuesta[10];
+    int j = 0;
+     for (int i = 0; i < can; i++)
+
+    {
+        printf(" Realizo la tarea numero %d ?\n",  tareas[i]->TareaID);
+        // printf(" duracion de la tarea %d\n",  tareas[i]->Duracion);
+        printf("Cuya descripcion es: \n");  
+        puts(tareas[i]->Descripcion);
+
+        printf("ingrese si para confirmar, no para denegar \n"); 
+        gets(respuesta); 
+        fflush(stdin); 
+        if (strcmp(respuesta, "si") == 0)
+        {   
+            tareasR[j] = tareas[i];
+         
+            tareas[i] = NULL; 
+            j++;
+        }
         
     }
 
