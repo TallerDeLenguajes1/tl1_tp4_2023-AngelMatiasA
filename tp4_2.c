@@ -16,6 +16,7 @@ struct Tarea
 void cargarTareas( Tarea ** tareas, int can);
 void moverRealizadas(Tarea ** tareas, int can, Tarea ** tareasR);
 void ListarTareas(Tarea ** tareas, int can, Tarea ** tareasR);
+void BuscarTareas(Tarea ** tareas, int can, Tarea ** tareasR, char* palabra);
 int main()
 {
 
@@ -60,6 +61,11 @@ int main()
 pendientes.*/
 ListarTareas(tareas, can, tareasR);
 
+printf("ingrese la palabra clave a buscar en la tarea \n"); 
+char * aux = malloc(sizeof(char)*20); 
+gets(aux); 
+fflush(stdin); 
+BuscarTareas(tareas, can, tareasR, aux);
 
 for (int i = 0; i < can; i++)
 {
@@ -168,5 +174,56 @@ printf("************* \n");
         }
         
     }
+
+} 
+
+/*7. Vuelva al branch main e implemente también una nueva versión de la función
+BuscarTarea en donde la misma sea por palabra clave en vez de por Id. (uno
+le manda una palabra y te tiene que devolver la primera tarea que contenga
+dicha palabra).
+Nota: Para realizar este punto, investigue el uso de la función strstr*/ 
+
+void BuscarTareas(Tarea ** tareas, int can, Tarea ** tareasR, char* palabra){
+    int encontrado = 0; 
+    int i = 0;
+    while (encontrado == 0 && i<can )
+    {
+         for ( i = 0; i < can; i++)
+    {
+       if (tareas[i] != NULL && strstr(tareas[i]->Descripcion, palabra))
+       {
+         printf("Tarea Encontrada es:  \n");
+         printf(" la tarea de id %d \n",  tareas[i]->TareaID);
+        printf(" Su duracion de la tarea %d\n",  tareas[i]->Duracion);
+             printf("Cuya descripcion es: \n");  
+        puts(tareas[i]->Descripcion); 
+        encontrado = 1;
+       }
+       else
+       {
+        if (tareasR[i] != NULL && strstr(tareasR[i]->Descripcion, palabra)){
+
+            printf("Tarea Encontrada es:  \n");
+         printf(" la tarea de id %d \n",  tareasR[i]->TareaID);
+        printf(" Su duracion de la tarea %d\n",  tareasR[i]->Duracion);
+             printf("Cuya descripcion es: \n");  
+        puts(tareasR[i]->Descripcion); 
+        encontrado == 1;
+
+        }
+        
+       }
+       
+    }
+        
+    }
+    if (encontrado == 0)
+    {
+       printf("no se encontro la tarea \n");
+    }
+    
+    
+   
+    
 
 }
