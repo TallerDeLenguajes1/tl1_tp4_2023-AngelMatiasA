@@ -76,11 +76,7 @@ BuscarTareas(tareas, can, tareasR, aux);
 for (int i = 0; i < can; i++)
 {
     free(tareas[i]->Descripcion);
-    free(tareas[i]->Duracion);
-    free(tareas[i]->TareaID);
     free(tareasR[i]->Descripcion);    
-    free(tareasR[i]->Duracion);   
-    free(tareasR[i]->TareaID);
 
 }
 free(tareas); 

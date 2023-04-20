@@ -1,0 +1,1 @@
+ tareasR[j] = tareas[i];
