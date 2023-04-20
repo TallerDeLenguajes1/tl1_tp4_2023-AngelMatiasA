@@ -16,7 +16,12 @@ struct Tarea
 void cargarTareas( Tarea ** tareas, int can);
 void moverRealizadas(Tarea ** tareas, int can, Tarea ** tareasR);
 void ListarTareas(Tarea ** tareas, int can, Tarea ** tareasR);
+
 void BuscarTareas(Tarea ** tareas, int can, Tarea ** tareasR, char* palabra);
+
+void BuscarTareasPorId(Tarea ** tareas, int can, Tarea ** tareasR);
+
+
 int main()
 {
 
@@ -60,6 +65,7 @@ int main()
     /*5. Mostrar por pantalla todas las tareas realizadas y luego listar las tareas
 pendientes.*/
 ListarTareas(tareas, can, tareasR);
+BuscarTareasPorId(tareas, can, tareasR);
 
 printf("ingrese la palabra clave a buscar en la tarea \n"); 
 char * aux = malloc(sizeof(char)*20); 
@@ -175,6 +181,7 @@ printf("************* \n");
         
     }
 
+
 } 
 
 /*7. Vuelva al branch main e implemente también una nueva versión de la función
@@ -224,6 +231,33 @@ void BuscarTareas(Tarea ** tareas, int can, Tarea ** tareasR, char* palabra){
     
     
    
+
+}
+
+/* Cree un nuevo branch llamado busca-tarea e implemente una función de
+búsqueda de tarea por nro. de id de nombre BuscarTarea. La misma devuelve
+la tarea solicitada.*/
+void BuscarTareasPorId(Tarea ** tareas, int can, Tarea ** tareasR){
+    int id ;
+    printf("ingrese el id de la tarea a buscar \n"); 
+    scanf("%d", &id);
+    fflush(stdin);
+    for (int i = 0; i < can; i++)
+    {
+        if (tareas[i] != NULL && tareas[i]->TareaID == id )
+        {
+            printf("La tarea con el id nro %d es: \n", id);
+            puts(tareas[i]->Descripcion);
+        }
+        if (tareasR[i] != NULL && tareasR[i]->TareaID == id)
+        {
+            printf("La tarea con el id nro %d es: \n", id);
+            puts(tareasR[i]->Descripcion);
+        }
+        
+        
+    }
+
     
 
 }
