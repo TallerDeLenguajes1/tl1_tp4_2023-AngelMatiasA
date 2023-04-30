@@ -108,7 +108,7 @@ void cargarTareas( Tarea ** tareas, int can){
         printf("ingrese una descripcion de la tarea \n"); 
         gets(aux); 
         fflush(stdin); 
-        tareas[i]->Descripcion = malloc(sizeof(char) * strlen(aux));
+        tareas[i]->Descripcion = malloc(sizeof(char) * strlen(aux) +1 );
         strcpy( tareas[i]->Descripcion, aux);
         
 
@@ -215,7 +215,7 @@ void BuscarTareas(Tarea ** tareas, int can, Tarea ** tareasR, char* palabra){
         printf(" Su duracion de la tarea %d\n",  tareasR[i]->Duracion);
              printf("Cuya descripcion es: \n");  
         puts(tareasR[i]->Descripcion); 
-        encontrado == 1;
+        encontrado = 1;
 
         }
         
