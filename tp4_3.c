@@ -3,7 +3,6 @@
 #include <string.h>
 #include <time.h>
 
-
 struct Tarea
 {
     int id;
@@ -20,7 +19,7 @@ struct Nodo
 Nodo *CrearListaVacia();
 Nodo *CrearNodo(Tarea tarea);
 Tarea cargarTarea();
-void AgregarLibro(Nodo **Lista, Tarea Tarea);
+void AgregarTarea(Nodo **Lista, Tarea Tarea);
 void MostrarLista(Nodo *lista);
 void moverTarea(Nodo **listaPend, Nodo **listaRealizado);
 Nodo *BuscarTareaID(Nodo *tareasPend, Nodo *tareasReal);
@@ -64,7 +63,7 @@ int main()
             while (opcion2 == 1)
             {
                 libroAux = cargarTarea(&id);
-                AgregarLibro(&listaPendientes, libroAux);
+                AgregarTarea(&listaPendientes, libroAux);
                 printf("quiere cargar otra tarea \n 1: para si, 0 para no \n");
                 scanf("%d", &opcion2);
                 fflush(stdin);
@@ -111,12 +110,12 @@ int main()
 
         case 5:
 
-            printf("  ******************\n Mostrar lista de realizado  \n");
+            printf("  ******************\n Mostrando lista de realizado  \n");
             MostrarLista(listaRealizado);
             break;
 
         case 6:
-            printf("******************\n Mostrar lista de pendientes  \n ");
+            printf("******************\n Mostrando lista de pendientes  \n ");
             MostrarLista(listaPendientes);
             break;
         case 7:
@@ -198,13 +197,21 @@ Tarea cargarTarea(int *id)
     aux.descripcion = malloc(sizeof(char) * strlen(buffer));
     strcpy(aux.descripcion, buffer);
 
-    printf("ingrese la duracion de la tarea \n");
-    scanf("%d", &aux.duracion);
-    fflush(stdin);
+    do
+    {
+        printf("ingrese la duracion de la tarea \n");
+        scanf("%d", &aux.duracion);
+        fflush(stdin);
+
+        if (aux.duracion < 10 || aux.duracion > 100)
+        {
+            printf("la duracion debe ser entre 10 y 100 \n \n");
+        }
+    } while (aux.duracion < 10 || aux.duracion > 100);
 
     return aux;
 }
-void AgregarLibro(Nodo **Lista, Tarea Tarea)
+void AgregarTarea(Nodo **Lista, Tarea Tarea)
 {
     Nodo *nuevoNodo = CrearNodo(Tarea);
     nuevoNodo->siguiente = *Lista;
@@ -220,22 +227,29 @@ void MostrarLista(Nodo *lista)
 
     int indice = 0;
     Nodo *aux = lista;
-    while (aux)
+    if (aux == NULL)
     {
-        printf("************* \n ");
-      
-        printf("el id del tarea es : %d \n ", aux->tarea.id);
-        printf("el descripcion del tarea es : ");
-        puts(aux->tarea.descripcion);
+        printf("\n No hay elementos en la lista \n       ***************** \n \n");
 
-        printf("la duracion de la tarea es : %d \n ", aux->tarea.duracion);
+       
+    }else
+    {
+         while (aux)
+        {
+            printf("************* \n ");
 
-        aux = aux->siguiente;
-        indice++;
+            printf("el id del tarea es : %d \n ", aux->tarea.id);
+            printf("el descripcion del tarea es : ");
+            puts(aux->tarea.descripcion);
+
+            printf("la duracion de la tarea es : %d \n ", aux->tarea.duracion);
+
+            aux = aux->siguiente;
+            indice++;
+        }
     }
+    
 }
-
-
 
 void eliminarTareaPorId(Nodo **listaP, Nodo **listaR)
 {
@@ -263,11 +277,11 @@ void eliminarTareaPorId(Nodo **listaP, Nodo **listaR)
         printf("Se elimino la tarea de id nro %d de la lista de Pendientes\n", id);
     }
     else if (aux == NULL)
-  
-    { 
+
+    {
         printf("ingresa al aux == null y redefine aux");
         aux = *listaR;
-        while (aux!= NULL && aux->tarea.id != id)
+        while (aux != NULL && aux->tarea.id != id)
         {
             auxAnterior = aux;
             aux = aux->siguiente;
@@ -275,27 +289,22 @@ void eliminarTareaPorId(Nodo **listaP, Nodo **listaR)
         if (aux == NULL)
         {
             printf("no se encontro la tarea de id nro %d\n", id);
+        }
+        else
 
-        } else
-       
-        if (aux == *listaR)
+            if (aux == *listaR)
         {
             *listaR = aux->siguiente;
             free(aux);
             printf("Se elimino la tarea de id nro %d de la lista de Realizados\n", id);
         }
-        else if (aux!=NULL)
+        else if (aux != NULL)
         {
             auxAnterior->siguiente = aux->siguiente;
             free(aux);
             printf("Se elimino la tarea de id nro %d de la lista de Realizados\n", id);
-         }
-     
         }
-        
-    
-  
-
+    }
 }
 Nodo *BuscarTareaID(Nodo *tareasPend, Nodo *tareasReal)
 {
@@ -318,8 +327,6 @@ Nodo *BuscarTareaID(Nodo *tareasPend, Nodo *tareasReal)
     }
     return aux;
 }
-
-
 
 Nodo *extraerTareaPorId(Nodo **lista, int id)
 {
