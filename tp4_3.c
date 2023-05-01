@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-
+/*Comenzando el tp5*/
 struct Tarea
 {
     int id;
