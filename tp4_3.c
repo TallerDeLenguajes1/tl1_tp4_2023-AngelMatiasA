@@ -25,12 +25,15 @@ void moverTarea(Nodo **listaPend, Nodo **listaRealizado);
 Nodo *BuscarTareaID(Nodo *tareasPend, Nodo *tareasReal);
 void BuscarTareaPorPalabra(Nodo *tareasP, Nodo *tareasR, char *palabra);
 void eliminarTareaPorId(Nodo **listaP, Nodo **listaR);
+void MostrarDatos(Nodo *lista);
+
 int main()
 {
     int idEliminar;
 
     Nodo *listaPendientes = CrearListaVacia();
     Nodo *listaRealizado = CrearListaVacia();
+    Nodo *TareasEnProceso = CrearListaVacia();
     Nodo *auxPBorrar;
     Nodo *aux;
     int opcion = 0;
@@ -221,6 +224,28 @@ void agregarNodo(Nodo **lista, Nodo *newNodo)
 {
     newNodo->siguiente = *lista;
     *lista = newNodo;
+}
+void MostrarDatos(Nodo *lista){
+     int cant = 0;
+     int tiempoAsociado = 0;
+    Nodo *aux = lista;
+    if (aux == NULL)
+    {
+        printf("\n No hay elementos en la lista \n       ***************** \n \n");   
+    }else
+    {
+         while (aux)
+        {
+            cant++;
+            tiempoAsociado += aux->tarea.duracion;
+            aux = aux->siguiente;
+            
+        }
+        printf("Esta lista contiene %d  tareas\n ", cant);
+        printf("el tiempo asociado es de : %d \n ", tiempoAsociado);
+
+    }
+    
 }
 void MostrarLista(Nodo *lista)
 {
